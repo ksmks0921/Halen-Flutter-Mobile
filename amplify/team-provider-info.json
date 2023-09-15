@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-halencustomerapp-dev-90855-authRole",
+      "UnauthRoleArn": "arn:aws:iam::022851596313:role/amplify-halencustomerapp-dev-90855-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::022851596313:role/amplify-halencustomerapp-dev-90855-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-halencustomerapp-dev-90855-deployment",
+      "UnauthRoleName": "amplify-halencustomerapp-dev-90855-unauthRole",
+      "StackName": "amplify-halencustomerapp-dev-90855",
+      "StackId": "arn:aws:cloudformation:us-east-1:022851596313:stack/amplify-halencustomerapp-dev-90855/8322ff40-409f-11ed-990a-0a04c8377975",
+      "AmplifyAppId": "d37yvhg1yn73je"
+    },
+    "categories": {
+      "auth": {
+        "halencustomerapp": {
+          "userPoolId": "us-east-1_G9gww0MvB",
+          "userPoolName": "DemandSideMiddleware",
+          "webClientId": "tsg8jh3qgv506totfihnkc14",
+          "nativeClientId": "tsg8jh3qgv506totfihnkc14",
+          "identityPoolId": "us-east-1:c5944fe5-4803-4542-94c2-07cdf9dafcdf",
+          "identityPoolName": "demandsidemiddleware",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::022851596313:role/Cognito_demandsidemiddlewareAuth_Role",
+          "authRoleName": "Cognito_demandsidemiddlewareAuth_Role",
+          "unauthRoleArn": "arn:aws:iam::022851596313:role/Cognito_demandsidemiddlewareUnauth_Role",
+          "unauthRoleName": "Cognito_demandsidemiddlewareUnauth_Role"
+        }
+      }
+    }
+  }
+}

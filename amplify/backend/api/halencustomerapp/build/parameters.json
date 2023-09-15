@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "halencustomerapp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authhalencustomerapp",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-halencustomerapp-dev-90855-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/d5f46f6202c95f95cf24312d67281066828a90fe"
+}

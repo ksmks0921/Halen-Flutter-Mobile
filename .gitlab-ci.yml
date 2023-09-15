@@ -1,0 +1,99 @@
+image: ghcr.io/cirruslabs/flutter:stable
+
+variables:
+  # To learn more go to https://dart.dev/tools/dart-test
+  # Or run `dart test --help`
+  PUB_VARS: "--platform vm --timeout 30s --concurrency=6 --test-randomize-ordering-seed=random --reporter=expanded"
+
+# Cache generated files and plugins between builds.
+.upload_cache:
+  cache:
+    when: 'on_success'
+    paths:
+      - .pub-cache/bin/
+      - .pub-cache/global_packages/
+      - .pub-cache/hosted/
+      - .dart_tool/
+      - .packages
+
+# Cache downloaded dependencies and plugins between builds.
+# To keep cache across branches add 'key: "$CI_JOB_NAME"'
+.download_cache:
+  cache:
+    paths:
+      - .dart_tool/
+      - .packages
+    policy: pull
+
+.use_pub_cache_bin:
+  # This runs before each job
+  extends:
+    - .download_cache
+  before_script:
+    # Set PUB_CACHE either here or in the CI/CD Settings if you have multiple jobs that use dart commands.
+    # PUB_CACHE is used by the `dart pub` command, it needs to be set so package dependencies are stored at the project-level for CI/CD operations.
+    - |
+      flutter clean
+      flutter pub get --precompile
+      flutter pub global activate dart_code_metrics
+      flutter pub global activate junitreport
+      export PUB_CACHE=".pub-cache"
+      export PATH="$PATH:$HOME/$PUB_CACHE/bin"
+
+format_test:
+  stage: test
+  extends:
+    - .use_pub_cache_bin
+  script:
+    - |
+      echo 'run "dart format ." if this fails'
+      dart format --set-exit-if-changed bin/ lib/ test/
+
+lint_test:
+  stage: test
+  extends:
+    - .use_pub_cache_bin
+  script:
+    - flutter analyze .
+
+code_quality:
+  stage: test
+  extends:
+    - .use_pub_cache_bin
+  script:
+   - |
+     metrics lib -r codeclimate > gl-code-quality-report.json
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+
+unit_test:
+  stage: test
+  extends:
+    - .use_pub_cache_bin
+  script:
+    - |
+      flutter test --machine --coverage | tojunit -o report.xml
+      lcov --summary coverage/lcov.info
+      genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines\.*: \d+\.\d+\%/'
+  artifacts:
+    name: coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+    reports:
+      junit: report.xml
+
+# This does not work with the Firebase CI Token
+# Is there a better way to achieve this?
+# deploy:
+#   stage: deploy
+#   image: andreysenov/firebase-tools:latest
+#   script:
+#     # - firebase deploy --token "$FIREBASE_TOKEN"
+#     |
+#       firebase projects:list
+#       firebase deploy --only hosting
+#   only:
+#     refs:
+#       - main

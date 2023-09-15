@@ -1,0 +1,127 @@
+{
+  "api": {
+    "halencustomerapp": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authhalencustomerapp"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "halencustomerapp": {
+      "customAuth": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_halencustomerapp_allowUnauthenticatedIdentities": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_authRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_authRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_identityPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_identityPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_unauthRoleArn": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_unauthRoleName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    },
+    "AMPLIFY_auth_halencustomerapp_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "halencustomerapp"
+        }
+      ]
+    }
+  }
+}
